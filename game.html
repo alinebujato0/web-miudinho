@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Jogo</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            background-image: url('imagens/fundogame.jpg');
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<canvas id="minha-tela" width="600" height="500"></canvas>
+
+<script>
+    var canvas = document.getElementById("minha-tela");
+    var ctx = canvas.getContext("2d");
+
+    var bola = 10;
+    var x = canvas.width/2;
+    var y = canvas.height-30;
+    var direcaox = 2;
+    var direcaoy = -2;
+    var altBarra = 10;
+    var largBarra = 70;
+    var barraX = (canvas.width-largBarra)/2;
+    var pressDir = false;
+    var pressEsq = false;
+    var contLinhaTij = 7;
+    var contColunaTij = 5;
+    var largTij = 70;
+    var altTij = 20;
+    var tijInterno = 10;
+    var tijTopo = 30;
+    var tijEsq = 30;
+    var recorde = 0;
+    var vidas = 3;
+
+    var tijolos = [];
+    for(var c=0; c < contColunaTij; c++) {
+        tijolos[c] = [];
+        for(var r=0; r <contLinhaTij; r++) {
+            tijolos[c][r] = { x: 0, y: 0, estado: 1 };
+        }
+    }
+    document.addEventListener("keydown", pressionar, false);
+    document.addEventListener("keyup", naoPressionar, false);
+    
+    //função para detectar tecla pressionada
+    function pressionar(tecla) {
+        if (tecla.keyCode == 39)
+            pressDir = true;
+        else (tecla.keyCode == 37) 
+            pressEsq = true;
+    }
+    //se não pressionar, não mover
+    function naoPressionar(tecla) {
+        if (tecla.keyCode == 39) 
+            pressDir = false;
+        else (tecla.keyCode == 37) 
+            pressEsq = false;
+    }
+    function detectarColisao() {
+        for(var c=0; c < contColunaTij; c++) {
+            for(var r=0; r < contLinhaTij; r++) {
+                var b = tijolos[c][r];
+                if(b.estado == 1) {
+                    if(x > b.x && x < b.x+largTij && y > b.y && y < b.y+altTij) {
+                        direcaoy = -direcaoy;
+                        b.estado = 0;
+                        recorde++;
+                        if(recorde == contLinhaTij*contColunaTij) {
+                            alert("VOCÊ GANHOU!");
+                            document.location.reload();
+                        }
+                    }
+                }
+            }
+        }
+    }
+    function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, bola, 0, Math.PI*2);
+        ctx.fillStyle = "#933";
+        ctx.fill();
+        ctx.closePath();
+    }
+    function drawPaddle() {
+        ctx.beginPath();
+        ctx.rect(barraX, canvas.height-altBarra, largBarra, altBarra);
+        ctx.fillStyle = "#933";
+        ctx.fill();
+        ctx.closePath();
+    }
+    function drawTijolos() {
+        for(var c=0; c<contColunaTij; c++) {
+            for(var r=0; r<contLinhaTij; r++) {
+                if(tijolos[c][r].estado == 1) {
+                    var brickX = (r*(largTij+tijInterno))+tijEsq;
+                    var brickY = (c*(altTij+tijInterno))+tijTopo;
+                    tijolos[c][r].x = brickX;
+                    tijolos[c][r].y = brickY;
+                    ctx.beginPath();
+                    ctx.rect(brickX, brickY, largTij, altTij);
+                    ctx.fillStyle = "#933";
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            }
+        }
+    }
+    function drawRecorde() {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#933";
+        ctx.fillText("Recorde: "+recorde, 8, 20);
+    }
+    function drawVidas() {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#933";
+        ctx.fillText("Vidas: "+vidas, canvas.width-65, 20);
+    }
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawTijolos();
+        drawBall();
+        drawPaddle();
+        drawRecorde();
+        drawVidas();
+        detectarColisao();
+        if(x + direcaox > canvas.width-bola || x + direcaox < bola) {
+            direcaox = -direcaox;
+        }
+        if(y + direcaoy < bola) {
+            direcaoy = -direcaoy;
+        }
+        else if(y + direcaoy > canvas.height-bola) {
+            if(x > barraX && x < barraX + largBarra) {
+                direcaoy = -direcaoy;
+            }
+            else {
+                vidas--;
+                if(!vidas) {
+                    alert("Você perdeu!");
+                    document.location.reload();
+                }
+                else {
+                    x = canvas.width/2;
+                    y = canvas.height-30;
+                    direcaox = 3;
+                    direcaoy = -3;
+                    barraX = (canvas.width-largBarra)/2;
+                }
+            }
+        }
+        if(pressDir && barraX < canvas.width-largBarra)
+            barraX += 7
+        else if(pressEsq && barraX > 0)
+            barraX -= 7;
+
+        x += direcaox;
+        y += direcaoy;
+        requestAnimationFrame(draw);
+    }
+    draw();
+</script>
+
+</body>
+</html>

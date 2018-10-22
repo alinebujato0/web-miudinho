@@ -1,0 +1,190 @@
+* {
+	margin: 0;
+	border: 0;
+	padding: 0;
+}
+body {
+  font-family: arial;
+  background: #000;
+}
+.header {
+  padding-top: 50px;
+  text-align: center;
+}
+
+#errolog {
+  color:white;
+}
+.main ul li { 
+	display: inline;
+	color: #000;
+	text-align: center;
+	font-family: arial;
+  font-size: 20px;
+}
+.main {
+  padding-bottom: 20px;
+}
+.main ul li a {
+	color: #933;
+	text-decoration:none;
+  margin-top: 2em;
+}
+.main-list{
+  padding-top: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+#principal {
+  height: 430px;
+}
+#principal .bottom_principal{
+  color: #fff;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#principal .container1 {
+  color: #fff; 
+  display: flex;
+  justify-content: center;
+}
+.container1 p {
+  max-width: 500px;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 16px;
+  height: 150px;
+}
+#projeto .header {
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
+#projeto {
+  color: #fff;
+}
+.container2 p {
+  max-width: 700px;
+  line-height: 1.5;
+  margin: 0 auto;
+  color: #fff;
+}
+.fotoprojeto {
+  margin-top: 50px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+}
+.container3 {
+  color: #fff;
+  max-width: 1000px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin: 0 auto; 
+}
+.container3 p, .container3 h2 {
+  padding-bottom: 20px;
+} 
+.container3 h3 {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.container4 {
+  color: #fff;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+.imagens {
+  text-align: center;
+}
+#img_aline img, #img_gabriel img, #img_henrique img, #img_juan img {
+  margin: 0 auto;
+  padding-top: 40px;
+}
+#img_aline p, #img_gabriel p, #img_henrique p, #img_juan p {
+  max-width: 200px;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  color: #fff;
+  margin: 0 auto;
+}
+#img_juan {
+  padding-bottom: 20px;
+}
+#robocup {
+  color: #fff;
+}
+.container5 {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+#robocup {
+  padding-bottom: 40px;
+}
+.container5 h2 {
+  padding-bottom: 15px;
+  padding-top: 20px;
+}
+.container5 h3 {
+  padding-bottom: 15px;
+}
+.footer{
+  text-align: center;
+  color: #fff;
+  padding-top: 40px;
+}
+#login {
+  border: 1px solid #00BFFF;
+  display: flex;
+  max-width: 210px;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 60px;
+  padding: 30px;
+}
+#log{
+  margin: 10px;
+  padding: 5px;
+}
+#senha{
+  margin: 10px;
+  padding: 5px;
+}
+#btn{
+  padding: 5px;
+  margin: 10px;
+}
+#box-btn{
+  max-width: 85px;
+  display: flex;
+  margin: 0 auto;
+}
+#imagem_usuario{
+  max-width: 65px;
+  display: flex;
+  margin: 0 auto;
+}
+@media only screen and (max-width: 768px) {
+/* tablet */
+  body {
+    font-family: arial;
+    background: #000;
+    color: #000;
+  }
+  .header{
+    max-width: 600px;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+/* celular */
+  body{
+    font-size: 10px;
+  }
+}
